@@ -1,0 +1,24 @@
+image:
+  repository: node-654e3bca7fbeeed18f81d7c7.ps-xaas.io/ocm-wstack/ipfs-document-manager
+  imagePullPolicy: Always
+  tag: main
+
+service:
+  name: ipfs-document-service
+  host: cloud-wallet.xfsc.dev
+  port: 8080
+
+cors:
+  active: true
+  origins: "*"
+  methods: "GET"
+
+ipfs:
+  host: ipfs-ipfs-ipfs-cluster.ipfs.svc.cluster.local
+  api_gateway_url: http://ipfs-ipfs-ipfs-cluster.ipfs.svc.cluster.local:8080/ipfs
+  rpc_api_port: 5001
+  log_level: info
+
+config:
+  server_mode: production
+  listen_port: 8080

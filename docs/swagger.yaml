@@ -1,0 +1,200 @@
+definitions:
+  main.IpfsErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  main.IpfsListResponse:
+    properties:
+      identifiers:
+        items:
+          $ref: '#/definitions/types.DataIdentifier'
+        type: array
+    type: object
+  main.IpfsResponse:
+    properties:
+      data:
+        items:
+          type: integer
+        type: array
+      identifier:
+        $ref: '#/definitions/types.DataIdentifier'
+    type: object
+  types.DataIdentifier:
+    properties:
+      format:
+        type: string
+      value:
+        type: string
+    type: object
+host: localhost:8000
+info:
+  contact: {}
+  description: A service wrapping Interplanetary Filesystem which can be used to store
+    and retrieve files there.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: IPFS Document Manager API
+  version: "1.0"
+paths:
+  /{id}:
+    delete:
+      description: delete document
+      parameters:
+      - description: id of host tenant
+        in: path
+        name: tenantId
+        required: true
+        type: string
+      - description: CID of document to be deleted
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.IpfsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.IpfsErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/main.IpfsErrorResponse'
+      summary: Delete a document from ipfs
+      tags:
+      - docs
+    get:
+      description: get document
+      parameters:
+      - description: id of host tenant
+        in: path
+        name: tenantId
+        required: true
+        type: string
+      - description: CID of stored document
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.IpfsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.IpfsErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/main.IpfsErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/main.IpfsErrorResponse'
+      summary: Get document from ipfs
+      tags:
+      - docs
+  /{id}/update:
+    put:
+      consumes:
+      - multipart/form-data
+      description: update document
+      parameters:
+      - description: id of host tenant
+        in: path
+        name: tenantId
+        required: true
+        type: string
+      - description: CID of stored document
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Document data to be updated with
+        in: formData
+        name: document
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.IpfsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.IpfsErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/main.IpfsErrorResponse'
+      summary: Update a document in ipfs
+      tags:
+      - docs
+  /create:
+    post:
+      consumes:
+      - multipart/form-data
+      description: create document
+      parameters:
+      - description: id of host tenant
+        in: path
+        name: tenantId
+        required: true
+        type: string
+      - description: Document data to be created
+        in: formData
+        name: document
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.IpfsResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/main.IpfsErrorResponse'
+      summary: Create a new document in ipfs
+      tags:
+      - docs
+  /list:
+    get:
+      description: list documents
+      parameters:
+      - description: id of host tenant
+        in: path
+        name: tenantId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.IpfsListResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/main.IpfsErrorResponse'
+      summary: Get documents' identifiers from ipfs
+      tags:
+      - docs
+swagger: "2.0"
