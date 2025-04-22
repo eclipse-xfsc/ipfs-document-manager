@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{.Values.service.name}}
+  template:
+    metadata:
+      labels:
+        app: {{.Values.service.name}}
+    spec:
+      containers:
+        - name: {{.Values.service.name}}-container
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.imagePullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+          readinessProbe:
+            httpGet:
+              path: /v1/metrics/health
+              port: {{ .Values.service.port }}
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 2
+            failureThreshold: 2
+            timeoutSeconds: 5
+
+          env:
+            - name: "IPFS_HOST"
+              value: {{.Values.ipfs.host}}
+
+            - name: "IPFS_API_GATEWAY_URL"
+              value: {{.Values.ipfs.api_gateway_url}}
+
+            - name: "IPFS_RPC_API_PORT"
+              value: {{.Values.ipfs.rpc_api_port | quote}}
+
+            - name: "IPFS_LOG_LEVEL"
+              value: {{.Values.ipfs.log_level}}
+
+            - name: "IPFSMANAGER_SERVERMODE"
+              value: {{.Values.config.server_mode}}
+
+            - name: "IPFSMANAGER_LISTEN_PORT"
+              value: {{.Values.config.listen_port | quote}}

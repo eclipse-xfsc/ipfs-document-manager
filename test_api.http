@@ -1,0 +1,21 @@
+POST http://localhost:8000/v1/tenants/tenant_space/api/ipfs/create
+Content-Type: multipart/form-data
+
+< ./test-did.json
+
+###
+PUT http://localhost:8000/v1/tenants/tenant_space/api/ipfs/QmU9Kj7M7jjCw9yBDuXgw2ynUid8tpSgZMBDDdCJvqQLR9/update
+Content-Type: multipart/form-data
+
+< ./test-did.json
+
+###
+DELETE http://localhost:8000/v1/tenants/tenant_space/api/ipfs/QmU9Kj7M7jjCw9yBDuXgw2ynUid8tpSgZMBDDdCJvqQLR9
+Accept: application/json
+
+###
+GET http://localhost:8000/v1/tenants/tenant_space/api/ipfs/QmU9Kj7M7jjCw9yBDuXgw2ynUid8tpSgZMBDDdCJvqQLR9
+Accept: application/json
+
+###
+###

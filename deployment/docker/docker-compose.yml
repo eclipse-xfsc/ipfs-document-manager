@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  server:
+    image: node-654e3bca7fbeeed18f81d7c7.ps-xaas.io/ocm-wstack/ipfs-document-manager:debug
+    build:
+      context: ../../.
+      dockerfile: ./deployment/docker/Dockerfile
+      args:
+        pluginRepoUrl: https://gitlab.eclipse.org/eclipse/xfsc/libraries/ssi/verifiable-data-registry/plugins/vdr-ipfs.git
+        pluginTag: v1.1.0
+
+    ports:
+      - "8000:8000"
+
+    depends_on:
+      ipfs-node:
+        condition: service_started
+
+    env_file:
+      - ../../.env
+
+  ipfs-node:
+    image: ipfs/kubo
+    restart: unless-stopped
+    volumes:
+      - ipfs_path:/data/ipfs
+      - ipfs_fuse:/ipfs
+      - ipns_fuse:/ipns
+    environment:
+      - IPFS_PATH=/data/ipfs
+      - IPFS_STAGING=/export
+    ports:
+      # Swarm listens on all interfaces, so is remotely reachable.
+      - 4001:4001/tcp
+      - 4001:4001/udp
+
+      # The following ports only listen on the loopback interface, so are not remotely reachable by default.
+      # If you want to override these or add more ports, see https://docs.docker.com/compose/extends/ .
+
+      # API port, which includes admin operations, so you probably don't want this remotely accessible.
+      - 5001:5001
+
+      # HTTP Gateway
+      - 8080:8080
+
+volumes:
+  ipfs_path:
+  ipfs_fuse:
+  ipns_fuse:
