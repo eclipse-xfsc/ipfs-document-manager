@@ -12,6 +12,7 @@ jobs:
     with: 
       dockerfile: "deployment/docker/Dockerfile"
       harbor_config: "deployment/harbor.config"
+      build_args: pluginRepoUrl=https://github.com/eclipse-xfsc/ssi-vdr-ipfs.git,tag=v1.2.0
   helm:
     uses: eclipse-xfsc/dev-ops/.github/workflows/helm.yml@main
     secrets: inherit
