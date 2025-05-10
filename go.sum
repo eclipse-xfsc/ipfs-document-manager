@@ -12,8 +12,8 @@ github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSs
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc h1:U9qPSI2PIWSS1VwoXQT9A3Wy9MM3WgvqSxFWenqJduM=
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/eclipse-xfsc/microservice-core-go v1.0.4 h1:2CyFy19/larCCYYD759NUUa6tU7sgpzVB34iDTHX3T4=
-github.com/eclipse-xfsc/microservice-core-go v1.0.4/go.mod h1:G+7J1TkAko2WO29zyAZ9f8mHLUseRLkuTlTkcSkH8ss=
+github.com/eclipse-xfsc/microservice-core-go v1.1.0 h1:Uyhk64iNiRELS6vjPNZfGKCvRUdpQp39n2oUKS4LBKM=
+github.com/eclipse-xfsc/microservice-core-go v1.1.0/go.mod h1:pMkUXQ6E3XLPzYhdHCwMEWx/as6QCaLdQguIFDbORlI=
 github.com/eclipse-xfsc/ssi-vdr-core v1.0.1 h1:YuAP6y3EE4yEjF+hhlBP+FghkxB/h05oYGr/22p26Dk=
 github.com/eclipse-xfsc/ssi-vdr-core v1.0.1/go.mod h1:RL3EvXGela2MSS9/P5YCFkKTmGW9FEgezvx067uiQJE=
 github.com/frankban/quicktest v1.14.6 h1:7Xjx+VpznH+oBnejlPUj8oUpdxnVs4f8XU8WnHkI4W8=
