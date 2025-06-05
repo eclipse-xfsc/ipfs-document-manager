@@ -5,7 +5,7 @@ go 1.24.0
 require (
 	github.com/eclipse-xfsc/microservice-core-go v1.0.4
 	github.com/eclipse-xfsc/ssi-vdr-core v1.0.1
-	github.com/gin-gonic/gin v1.10.0
+	github.com/gin-gonic/gin v1.10.1
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/swaggo/gin-swagger v1.6.0
 	github.com/swaggo/swag v1.16.4
